@@ -34,7 +34,6 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
   netcat-openbsd \
   nodejs \
   ntp \
-  openjdk-8-jre \
   redis-server \
   sendmail \
   software-properties-common \
@@ -62,22 +61,18 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
   libgd-perl \
   libclass-dbi-pg-perl \
   libapache2-mod-perl2 \
-  maven \
-  socat \
   ffmpeg \
-  mediainfo \
-  wkhtmltopdf && \
-  strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+  mediainfo
+
+COPY conf/proc-specific-install.sh /proc-specific-install.sh
+RUN chmod 755 /proc-specific-install.sh && \
+  bash /proc-specific-install.sh
 
 # Install PHP, PHP packages, Postgresql, and Apache2 apt packages.
 RUN apt-get install -y \
   imagemagick \
   apache2 \
   apache2-utils
-
-RUN wget https://download.docker.com/linux/static/stable/x86_64/docker-20.10.21.tgz \
-  && tar -xvzf docker-20.10.21.tgz \
-  && cp docker/* /usr/bin/
 
 # Add ondrej/php PPA repository for PHP.
 RUN add-apt-repository ppa:ondrej/php \
@@ -289,15 +284,6 @@ RUN update-alternatives --set php /usr/bin/php8.2 && \
   a2enmod php8.2 && \
   service apache2 restart
 
-# https://github.com/reeze/php-leveldb
-# RUN apt-get -y install libleveldb-dev && \
-#   git clone https://github.com/reeze/php-leveldb.git && \
-#   cd php-leveldb && \
-#   phpize && \
-#   ./configure && \
-#   make && \
-#   make install
-
 RUN apt-get install -y \
   php-redis \
   php-imagick \
@@ -333,7 +319,7 @@ ADD conf/run-httpd.sh /run-httpd.sh
 RUN chmod -v +x /run-httpd.sh
 
 # Install yarn
-RUN npm install --global yarn
+# RUN npm install --global yarn
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
   chmod +x wp-cli.phar && \
@@ -341,7 +327,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 # Our info for the info message!
 ENV VERSION 14
-ENV BUILD_DATE September 6, 2023
+ENV BUILD_DATE September 7, 2023
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
