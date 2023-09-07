@@ -65,7 +65,9 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
   maven \
   socat \
   ffmpeg \
-  mediainfo
+  mediainfo \
+  wkhtmltopdf && \
+  strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 
 # Install PHP, PHP packages, Postgresql, and Apache2 apt packages.
 RUN apt-get install -y \
@@ -338,8 +340,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
   mv wp-cli.phar /usr/local/bin/wp
 
 # Our info for the info message!
-ENV VERSION 13
-ENV BUILD_DATE August 31, 2023
+ENV VERSION 14
+ENV BUILD_DATE September 6, 2023
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
