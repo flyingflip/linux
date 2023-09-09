@@ -12,24 +12,24 @@ services:
   webapp:
     image: flyingflip/linux:14
     container_name: webapp
-	  # Volumes specify where our files are within the container. In this example, the directory where
-	  # the docker-compose.yml is located happens to also be the folder where the web document root folder is.
-	  # As such, we will mount it to a common http endpoint at /var/www/html and tell Apache via our 
-	  # environment variables where to look for our web folder.
-	  volumes:
+     # Volumes specify where our files are within the container. In this example, the directory where
+     # the docker-compose.yml is located happens to also be the folder where the web document root folder is.
+     # As such, we will mount it to a common http endpoint at /var/www/html and tell Apache via our 
+     # environment variables where to look for our web folder.
+    volumes:
       - ./:/var/www/html
     environment:
-		  # We need to tell Apache where to find the document root. Based on the volumnes configuration, it is
-		  # in a folder called "web" in the current directory. If it were in one called "docroot" it would be
-		  # listed as /var/www/html/docroot
+      # We need to tell Apache where to find the document root. Based on the volumnes configuration, it is
+      # in a folder called "web" in the current directory. If it were in one called "docroot" it would be
+      # listed as /var/www/html/docroot
       DOCROOT: /var/www/html/web 
-	    # Specify the version of PHP we wish to use. Available options are PHP 5.6, 7.4, 8.0, 8.1, and 8.2
+      # Specify the version of PHP we wish to use. Available options are PHP 5.6, 7.4, 8.0, 8.1, and 8.2
       PHP_VERSION: php8.1
-	    # Other environment variable settings detailed below can go in this space as well.
+      # Other environment variable settings detailed below can go in this space as well.
     ports:
-		  # Always map port 80 and 443. If you use nginx for your proxy, proxy to port 443 using https. The container
-		  # contains the self signed certs to make secure communication happen on the intranet level, giving you end
-		  # to end encryption on all of your network traffic.
+      # Always map port 80 and 443. If you use nginx for your proxy, proxy to port 443 using https. The container
+      # contains the self signed certs to make secure communication happen on the intranet level, giving you end
+      # to end encryption on all of your network traffic.
       - "8097:80"
       - "8098:443"
     depends_on:
