@@ -12,6 +12,14 @@ if [ ! -v PHP_VERSION ]; then
   echo "Warning: PHP_VERSION not set. Default of PHP 8.2 (php8.2) enabled."
 fi
 
+if [[ ! -n "${EXPOSED_HTTP_PORT}" ]]; then
+  export EXPOSED_HTTP_PORT=80
+fi
+
+if [[ ! -n "${EXPOSED_HTTPS_PORT}" ]]; then
+  export EXPOSED_HTTPS_PORT=443
+fi
+
 # Handle HTACCESS conditions if configured.
 if [[ -n "${HTACCESS_DESCRIPTION}" ]]; then
   /usr/bin/htpasswd -cb /var/www/.htpasswd $HTACCESS_USERNAME $HTACCESS_PASSWORD

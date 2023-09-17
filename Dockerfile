@@ -326,8 +326,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
   mv wp-cli.phar /usr/local/bin/wp
 
 # Our info for the info message!
-ENV VERSION 14
-ENV BUILD_DATE September 7, 2023
+ENV VERSION 15
+ENV BUILD_DATE September 17, 2023
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
