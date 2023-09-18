@@ -24,9 +24,15 @@ fi
 if [[ -n "${HTACCESS_DESCRIPTION}" ]]; then
   /usr/bin/htpasswd -cb /var/www/.htpasswd $HTACCESS_USERNAME $HTACCESS_PASSWORD
   perl -pe 's/-\$(\{)?([a-zA-Z_]\w*)(?(1)\})/$ENV{$2}/g' < /etc/apache2/apache2-auth.conf > /etc/apache2/apache2.conf
+  perl -pe 's/-\$(\{)?([a-zA-Z_]\w*)(?(1)\})/$ENV{$2}/g' < /etc/apache2/sites-available/00x-default.conf > /etc/apache2/sites-available/000-default.conf
+  perl -pe 's/-\$(\{)?([a-zA-Z_]\w*)(?(1)\})/$ENV{$2}/g' < /etc/apache2/sites-available/00x-loading.conf > /etc/apache2/sites-available/000-loading.conf
 else
   perl -pe 's/-\$(\{)?([a-zA-Z_]\w*)(?(1)\})/$ENV{$2}/g' < /etc/apache2/apache2-noauth.conf > /etc/apache2/apache2.conf
+  perl -pe 's/-\$(\{)?([a-zA-Z_]\w*)(?(1)\})/$ENV{$2}/g' < /etc/apache2/sites-available/00x-default.conf > /etc/apache2/sites-available/000-default.conf
+  perl -pe 's/-\$(\{)?([a-zA-Z_]\w*)(?(1)\})/$ENV{$2}/g' < /etc/apache2/sites-available/00x-loading.conf > /etc/apache2/sites-available/000-loading.conf
 fi
+
+ln -s /etc/apache2/sites-available/000-loading.conf /etc/apache2/sites-enabled/000-loading.conf
 
 # envsubst < /etc/apache2/ports.txt > /etc/apache2/ports.conf
 if [ -f "/data/webalizer.conf" ]; then
@@ -154,7 +160,7 @@ fi
 # the web files to the Apache user.
 rm -rf /etc/apache2/sites-available/000-loading.conf
 rm -rf /etc/apache2/sites-enabled/000-loading.conf
-envsubst < /etc/apache2/sites-available/000-defaulta.conf > /etc/apache2/sites-available/000-default.conf
+# envsubst < /etc/apache2/sites-available/000-defaulta.conf > /etc/apache2/sites-available/000-default.conf
 ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 if [[ -n "${PHP_VERSION}" ]]; then

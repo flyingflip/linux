@@ -8,7 +8,6 @@ then
   wget https://download.docker.com/linux/static/stable/x86_64/docker-24.0.6.tgz
   tar -xvzf docker-24.0.6.tgz
   cp docker/* /usr/bin/
-
   apt-get -y install libleveldb-dev
   git clone https://github.com/reeze/php-leveldb.git
   cd php-leveldb
@@ -17,6 +16,8 @@ then
   make
   make install
   cd ../
+  echo "extension=leveldb.so" > /etc/php/8.2/apache2/conf.d/S20-leveldb.ini
+  echo "extension=leveldb.so" > /etc/php/8.1/apache2/conf.d/S20-leveldb.ini
 else
   strip --remove-section=.note.ABI-tag /usr/lib/aarch64-linux-gnu/libQt5Core.so.5
   wget https://download.docker.com/linux/static/stable/aarch64/docker-24.0.6.tgz

@@ -64,10 +64,6 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
   ffmpeg \
   mediainfo
 
-COPY conf/proc-specific-install.sh /proc-specific-install.sh
-RUN chmod 755 /proc-specific-install.sh && \
-  bash /proc-specific-install.sh
-
 # Install PHP, PHP packages, Postgresql, and Apache2 apt packages.
 RUN apt-get install -y \
   imagemagick \
@@ -216,16 +212,20 @@ RUN apt-get install -y \
   php8.2-mongodb \
   libapache2-mod-php8.2
 
+COPY conf/proc-specific-install.sh /proc-specific-install.sh
+RUN chmod 755 /proc-specific-install.sh && \
+  bash /proc-specific-install.sh
+
 RUN useradd apache2
 COPY var/loading /var/loading
 #COPY etc/apache2/ports.txt /etc/apache2/ports.txt
 COPY etc/apache2/envvars /etc/apache2/envvars
 COPY etc/apache2/apache2-auth.conf /etc/apache2/apache2-auth.conf
 COPY etc/apache2/apache2-noauth.conf /etc/apache2/apache2-noauth.conf
-COPY etc/apache2/sites-available/000-loading.conf /etc/apache2/sites-available/000-loading.conf
-COPY etc/apache2/sites-available/000-defaulta.conf /etc/apache2/sites-available/000-defaulta.conf
+COPY etc/apache2/sites-available/00x-loading.conf /etc/apache2/sites-available/00x-loading.conf
+COPY etc/apache2/sites-available/00x-default.conf /etc/apache2/sites-available/00x-default.conf
 RUN rm /etc/apache2/sites-enabled/000-default.conf
-RUN ln -s /etc/apache2/sites-available/000-loading.conf /etc/apache2/sites-enabled/000-loading.conf
+#RUN ln -s /etc/apache2/sites-available/000-loading.conf /etc/apache2/sites-enabled/000-loading.conf
 
 COPY etc/php/7.4/apache2/php.ini /etc/php/7.4/apache2/php.ini
 COPY conf/mail.ini /etc/php/7.4/apache2/conf.d/mail.ini
