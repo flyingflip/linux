@@ -171,7 +171,7 @@ ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/0
 if [[ -n "${PHP_VERSION}" ]]; then
 
   shopt -s extglob
-  if [[ $PHP_VERSION == @(php5.6|php7.4|php8.0|php8.1|php8.2|php8.3) ]]; then
+  if [[ $PHP_VERSION == @(php7.4|php8.0|php8.1|php8.2|php8.3) ]]; then
     echo "PHP set to version $PHP_VERSION"
   else
     echo "PHP version $PHP_VERSION is not valid. Valid values: php7.4 to php8.3. Set to php8. by default"

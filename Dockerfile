@@ -77,36 +77,6 @@ RUN add-apt-repository ppa:ondrej/php \
   && apt-get install dialog
 
 RUN apt-get install -y \
-  php5.6 \
-  php5.6-bcmath \
-  php5.6-bz2 \
-  php5.6-cli \
-  php5.6-common \
-  php5.6-curl \
-  php5.6-dba \
-  php5.6-gd \
-  php5.6-imap \
-  php5.6-json \
-  php5.6-ldap \
-  php5.6-mbstring \
-  php5.6-mysql \
-  php5.6-mysqlnd \
-  php5.6-odbc \
-  php5.6-opcache \
-  php5.6-apcu \
-  php5.6-readline \
-  php5.6-soap \
-  php5.6-zip \
-  php5.6-pgsql \
-  php5.6-dev \
-  php5.6-xml \
-  php5.6-imagick \
-  php5.6-intl \
-  php5.6-mongodb \
-  php5.6-uploadprogress \
-  libapache2-mod-php5.6
-
-RUN apt-get install -y \
   php7.4 \
   php7.4-bcmath \
   php7.4-bz2 \
@@ -303,13 +273,12 @@ RUN rm -rf /var/www/html \
   && a2enmod ssl && \
   service apache2 restart
 
-RUN update-alternatives --set php /usr/bin/php8.2 && \
-  a2dismod php5.6 && \
+RUN update-alternatives --set php /usr/bin/php7.4 && \
   a2dismod php7.4 && \
   a2dismod php8.0 && \
   a2dismod php8.1 && \
+  a2dismod php8.2 && \
   a2dismod php8.3 && \
-  a2enmod php8.2 && \
   service apache2 restart
 
 RUN apt-get install -y \
