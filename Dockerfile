@@ -107,6 +107,30 @@ RUN apt-get install -y \
   libapache2-mod-php7.4
 
 RUN apt-get install -y \
+  php8.3 \
+  php8.3-bcmath \
+  php8.3-bz2 \
+  php8.3-cli \
+  php8.3-common \
+  php8.3-curl \
+  php8.3-dba \
+  php8.3-dev \
+  php8.3-gd \
+  php8.3-ldap \
+  php8.3-mbstring \
+  php8.3-mysql \
+  php8.3-opcache \
+  php-apcu \
+  php8.3-readline \
+  php8.3-soap \
+  php8.3-zip \
+  php8.3-pgsql \
+  php8.3-dev \
+  php8.3-xml \
+  php8.3-intl \
+  libapache2-mod-php8.3
+
+RUN apt-get install -y \
   php8.0 \
   php8.0-bcmath \
   php8.0-bz2 \
@@ -180,30 +204,6 @@ RUN apt-get install -y \
   php8.2-xml \
   php8.2-intl \
   libapache2-mod-php8.2
-
-RUN apt-get install -y \
-  php8.3 \
-  php8.3-bcmath \
-  php8.3-bz2 \
-  php8.3-cli \
-  php8.3-common \
-  php8.3-curl \
-  php8.3-dba \
-  php8.3-dev \
-  php8.3-gd \
-  php8.3-ldap \
-  php8.3-mbstring \
-  php8.3-mysql \
-  php8.3-opcache \
-  php-apcu \
-  php8.3-readline \
-  php8.3-soap \
-  php8.3-zip \
-  php8.3-pgsql \
-  php8.3-dev \
-  php8.3-xml \
-  php8.3-intl \
-  libapache2-mod-php8.3
 
 COPY conf/proc-specific-install.sh /proc-specific-install.sh
 RUN chmod 755 /proc-specific-install.sh && \
@@ -323,8 +323,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
   mv wp-cli.phar /usr/local/bin/wp
 
 # Our info for the info message!
-ENV VERSION 15
-ENV BUILD_DATE September 29, 2023
+ENV VERSION 16
+ENV BUILD_DATE November 24, 2023
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \

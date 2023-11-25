@@ -24,6 +24,4 @@ else
   wget https://download.docker.com/linux/static/stable/aarch64/docker-24.0.6.tgz
   tar -xvzf docker-24.0.6.tgz
   cp docker/* /usr/bin/
-
 fi
-

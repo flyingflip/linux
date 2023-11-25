@@ -174,7 +174,7 @@ if [[ -n "${PHP_VERSION}" ]]; then
   if [[ $PHP_VERSION == @(php7.4|php8.0|php8.1|php8.2|php8.3) ]]; then
     echo "PHP set to version $PHP_VERSION"
   else
-    echo "PHP version $PHP_VERSION is not valid. Valid values: php7.4 to php8.3. Set to php8. by default"
+    echo "PHP version $PHP_VERSION is not valid. Valid values: php7.4 to php8.3. Set to php8.2. by default"
     export PHP_VERSION='php8.2'
   fi
 
