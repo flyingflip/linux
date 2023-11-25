@@ -10,7 +10,7 @@ The best way to configure the container is through a `docker-compose.yml` docume
 version: '3'
 services:
   webapp:
-    image: flyingflip/linux:14
+    image: flyingflip/linux:16
     container_name: webapp
      # Volumes specify where our files are within the container. In this example, the directory where
      # the docker-compose.yml is located happens to also be the folder where the web document root folder is.
@@ -23,7 +23,7 @@ services:
       # in a folder called "web" in the current directory. If it were in one called "docroot" it would be
       # listed as /var/www/html/docroot
       DOCROOT: /var/www/html/web 
-      # Specify the version of PHP we wish to use. Available options are PHP 5.6, 7.4, 8.0, 8.1, and 8.2
+      # Specify the version of PHP we wish to use. Available options are PHP 7.4, 8.0, 8.1, 8.2 and 8.3
       PHP_VERSION: php8.1
       # Other environment variable settings detailed below can go in this space as well.
     ports:
