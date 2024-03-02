@@ -103,6 +103,8 @@ RUN apt-get install -y \
   php7.4-imagick \
   php7.4-intl \
   php7.4-mongodb \
+  php7.4-redis \
+  php7.4-memcached \
   php7.4-uploadprogress \
   libapache2-mod-php7.4
 
@@ -120,7 +122,7 @@ RUN apt-get install -y \
   php8.3-mbstring \
   php8.3-mysql \
   php8.3-opcache \
-  php-apcu \
+  php8.3-apcu \
   php8.3-readline \
   php8.3-soap \
   php8.3-zip \
@@ -128,6 +130,8 @@ RUN apt-get install -y \
   php8.3-dev \
   php8.3-xml \
   php8.3-intl \
+  php8.3-redis \
+  php8.3-memcached \
   libapache2-mod-php8.3
 
 RUN apt-get install -y \
@@ -151,6 +155,8 @@ RUN apt-get install -y \
   php8.0-dev \
   php8.0-xml \
   php8.0-imagick \
+  php8.0-redis \
+  php8.0-memcached \
   php8.0-intl \
   php8.0-mongodb \
   libapache2-mod-php8.0
@@ -178,6 +184,8 @@ RUN apt-get install -y \
   php8.1-imagick \
   php8.1-intl \
   php8.1-mongodb \
+  php8.1-redis \
+  php8.1-memcached \
   libapache2-mod-php8.1
 
 RUN apt-get install -y \
@@ -194,7 +202,7 @@ RUN apt-get install -y \
   php8.2-mbstring \
   php8.2-mysql \
   php8.2-opcache \
-  php-apcu \
+  php8.2-apcu \
   php8.2-mongodb \
   php8.2-readline \
   php8.2-soap \
@@ -203,6 +211,9 @@ RUN apt-get install -y \
   php8.2-dev \
   php8.2-xml \
   php8.2-intl \
+  php8.2-redis \
+  php8.2-imagick \
+  php8.2-memcached \
   libapache2-mod-php8.2
 
 COPY conf/proc-specific-install.sh /proc-specific-install.sh
@@ -273,7 +284,7 @@ RUN rm -rf /var/www/html \
   && a2enmod ssl && \
   service apache2 restart
 
-RUN update-alternatives --set php /usr/bin/php7.4 && \
+RUN update-alternatives --set php /usr/bin/php8.2 && \
   a2dismod php7.4 && \
   a2dismod php8.0 && \
   a2dismod php8.1 && \
@@ -281,12 +292,7 @@ RUN update-alternatives --set php /usr/bin/php7.4 && \
   a2dismod php8.3 && \
   service apache2 restart
 
-RUN apt-get install -y \
-  php-redis \
-  php-imagick \
-  php-pear \
-  php-memcached \
-  mlocate
+RUN apt-get install -y mlocate
 
 RUN pecl channel-update pecl.php.net && \
   pear install PHP_CodeSniffer
@@ -323,8 +329,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
   mv wp-cli.phar /usr/local/bin/wp
 
 # Our info for the info message!
-ENV VERSION 16
-ENV BUILD_DATE November 24, 2023
+ENV VERSION 17
+ENV BUILD_DATE March 2, 2024
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
