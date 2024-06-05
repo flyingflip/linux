@@ -132,6 +132,7 @@ RUN apt-get install -y \
   php8.3-intl \
   php8.3-redis \
   php8.3-memcached \
+  php8.3-uploadprogress \
   libapache2-mod-php8.3
 
 RUN apt-get install -y \
@@ -159,6 +160,7 @@ RUN apt-get install -y \
   php8.0-memcached \
   php8.0-intl \
   php8.0-mongodb \
+  php8.0-uploadprogress \
   libapache2-mod-php8.0
 
 RUN apt-get install -y \
@@ -186,6 +188,7 @@ RUN apt-get install -y \
   php8.1-mongodb \
   php8.1-redis \
   php8.1-memcached \
+  php8.1-uploadprogress \
   libapache2-mod-php8.1
 
 RUN apt-get install -y \
@@ -214,6 +217,7 @@ RUN apt-get install -y \
   php8.2-redis \
   php8.2-imagick \
   php8.2-memcached \
+  php8.2-uploadprogress \
   libapache2-mod-php8.2
 
 COPY conf/proc-specific-install.sh /proc-specific-install.sh
@@ -329,8 +333,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
   mv wp-cli.phar /usr/local/bin/wp
 
 # Our info for the info message!
-ENV VERSION 17
-ENV BUILD_DATE March 2, 2024
+ENV VERSION 19
+ENV BUILD_DATE June 5, 2024
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \

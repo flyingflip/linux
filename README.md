@@ -7,10 +7,9 @@ The best way to configure the container is through a `docker-compose.yml` docume
 
 ### Example docker-compose.yml file
 ```yaml
-version: '3'
 services:
   webapp:
-    image: flyingflip/linux:16
+    image: flyingflip/linux
     container_name: webapp
      # Volumes specify where our files are within the container. In this example, the directory where
      # the docker-compose.yml is located happens to also be the folder where the web document root folder is.
@@ -24,7 +23,7 @@ services:
       # listed as /var/www/html/docroot
       DOCROOT: /var/www/html/web 
       # Specify the version of PHP we wish to use. Available options are PHP 7.4, 8.0, 8.1, 8.2 and 8.3
-      PHP_VERSION: php8.1
+      PHP_VERSION: php8.3
       # Other environment variable settings detailed below can go in this space as well.
     ports:
       # Always map port 80 and 443. If you use nginx for your proxy, proxy to port 443 using https. The container
