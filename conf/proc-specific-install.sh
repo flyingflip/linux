@@ -19,9 +19,9 @@ then
   echo "extension=leveldb.so" > /etc/php/8.2/apache2/conf.d/S20-leveldb.ini
   echo "extension=leveldb.so" > /etc/php/8.1/apache2/conf.d/S20-leveldb.ini
   echo "extension=leveldb.so" > /etc/php/8.3/apache2/conf.d/S20-leveldb.ini
-  echo "extension=leveldb.so" > /etc/php/8.3/cli/conf.ed/S20-leveldb.ini
-  echo "extension=leveldb.so" > /etc/php/8.2/cli/conf.ed/S20-leveldb.ini
-  echo "extension=leveldb.so" > /etc/php/8.1/cli/conf.ed/S20-leveldb.ini
+  echo "extension=leveldb.so" > /etc/php/8.3/cli/conf.d/S20-leveldb.ini
+  echo "extension=leveldb.so" > /etc/php/8.2/cli/conf.d/S20-leveldb.ini
+  echo "extension=leveldb.so" > /etc/php/8.1/cli/conf.d/S20-leveldb.ini
 else
   strip --remove-section=.note.ABI-tag /usr/lib/aarch64-linux-gnu/libQt5Core.so.5
   wget https://download.docker.com/linux/static/stable/aarch64/docker-25.0.3.tgz
