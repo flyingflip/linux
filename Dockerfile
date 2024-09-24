@@ -6,9 +6,9 @@ LABEL author="Michael R. Bagnall <mbagnall@flyingflip.com>"
 
 WORKDIR /root
 
-ENV TERM xterm
+ENV TERM=xterm
 
-ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/www/html/vendor/drush/drush:vendor/drush/drush:/var/www/html/drush/drush:/var/www/html/docroot/vendor/drush/drush
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/www/html/vendor/drush/drush:vendor/drush/drush:/var/www/html/drush/drush:/var/www/html/docroot/vendor/drush/drush
 
 # Update to NodeJS 16 and install nvm for supporting other versions.
 RUN apt-get update && apt-get -y upgrade
@@ -333,8 +333,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
   mv wp-cli.phar /usr/local/bin/wp
 
 # Our info for the info message!
-ENV VERSION 21
-ENV BUILD_DATE September 24, 2024
+ENV VERSION=21
+ENV BUILD_DATE="September 24, 2024"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
