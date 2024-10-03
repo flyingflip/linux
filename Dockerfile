@@ -332,9 +332,34 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
   chmod +x wp-cli.phar && \
   mv wp-cli.phar /usr/local/bin/wp
 
+RUN cpanm HTML::Template && \
+  cpanm GD::Image && \
+  cpanm ExtUtils::PkgConfig && \
+  cpanm Crypt::Blowfish && \
+  cpanm HTTP::Request && \
+  cpanm Test::More && \
+  cpanm Image::Resize && \
+  cpanm CGI && \
+  cpanm CGI::Carp && \
+  cpanm --force Class::HPLOO && \
+  cpanm --force HDB && \
+  cpanm --force DBD && \
+  cpanm --force DBI && \
+  cpanm Net::HTTP && \
+  cpanm URI && \
+  cpanm JSON && \
+  cpanm File::MimeInfo && \
+  cpanm HTTP::Request::AsCGI && \
+  cpanm LWP::Protocol::https && \
+  cpanm Email::Sender && \
+  cpanm Email::Simple && \
+  cpanm YAML::XS && \
+  cpanm Email::Sender::Transport::SMTPS && \
+  cpanm HTML::Template
+
 # Our info for the info message!
-ENV VERSION=21
-ENV BUILD_DATE="September 24, 2024"
+ENV VERSION=22
+ENV BUILD_DATE="October 3, 2024"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
