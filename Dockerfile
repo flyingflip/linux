@@ -337,7 +337,7 @@ RUN cpanm HTML::Template && \
   cpanm ExtUtils::PkgConfig && \
   cpanm Crypt::Blowfish && \
   cpanm HTTP::Request && \
-  cpanm Test::More && \
+  cpanm --force Test::More && \
   cpanm Image::Resize && \
   cpanm CGI && \
   cpanm CGI::Carp && \
@@ -355,11 +355,12 @@ RUN cpanm HTML::Template && \
   cpanm Email::Simple && \
   cpanm YAML::XS && \
   cpanm Email::Sender::Transport::SMTPS && \
-  cpanm HTML::Template
+  cpanm HTML::Template && \
+  cpanm Email::SendGrid::V3
 
 # Our info for the info message!
-ENV VERSION=22
-ENV BUILD_DATE="October 3, 2024"
+ENV VERSION=22.1
+ENV BUILD_DATE="October 4, 2024"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
