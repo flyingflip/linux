@@ -56,7 +56,7 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
   ghostscript \
   logrotate \
   cpanminus \
-  webalizer \
+  # webalizer \
   libgd-dev \
   libgd-perl \
   libclass-dbi-pg-perl \
@@ -107,6 +107,33 @@ RUN apt-get install -y \
   php7.4-memcached \
   php7.4-uploadprogress \
   libapache2-mod-php7.4
+
+  RUN apt-get install -y \
+  php8.4 \
+  php8.4-bcmath \
+  php8.4-bz2 \
+  php8.4-cli \
+  php8.4-common \
+  php8.4-curl \
+  php8.4-dba \
+  php8.4-dev \
+  php8.4-gd \
+  php8.4-ldap \
+  php8.4-mbstring \
+  php8.4-mysql \
+  php8.4-opcache \
+  php8.4-apcu \
+  php8.4-readline \
+  php8.4-soap \
+  php8.4-zip \
+  php8.4-pgsql \
+  php8.4-dev \
+  php8.4-xml \
+  php8.4-intl \
+  php8.4-redis \
+  php8.4-memcached \
+  php8.4-uploadprogress \
+  libapache2-mod-php8.4
 
 RUN apt-get install -y \
   php8.3 \
@@ -255,7 +282,11 @@ COPY etc/php/8.3/apache2/php.ini /etc/php/8.3/apache2/php.ini
 COPY conf/mail.ini /etc/php/8.3/apache2/conf.d/mail.ini
 COPY conf/mail.ini /etc/php/8.3/cli/conf.d/mail.ini
 
-COPY conf/webalizer.conf /etc/webalizer/webalizer.conf
+COPY etc/php/8.4/apache2/php.ini /etc/php/8.4/apache2/php.ini
+COPY conf/mail.ini /etc/php/8.4/apache2/conf.d/mail.ini
+COPY conf/mail.ini /etc/php/8.4/cli/conf.d/mail.ini
+
+# COPY conf/webalizer.conf /etc/webalizer/webalizer.conf
 COPY etc/logrotate /etc/cron.daily/logrotate
 COPY etc/apache2-logrotate /etc/logrotate.d/apache2
 
@@ -294,6 +325,7 @@ RUN update-alternatives --set php /usr/bin/php8.2 && \
   a2dismod php8.1 && \
   a2dismod php8.2 && \
   a2dismod php8.3 && \
+  a2dismod php8.4 && \
   service apache2 restart
 
 RUN apt-get install -y mlocate
@@ -351,6 +383,8 @@ RUN cpanm HTML::Template && \
   cpanm File::MimeInfo && \
   cpanm HTTP::Request::AsCGI && \
   cpanm LWP::Protocol::https && \
+  cpanm --force Module::Pluggable && \
+  cpanm Email::Abstract && \
   cpanm Email::Sender && \
   cpanm Email::Simple && \
   cpanm YAML::XS && \
