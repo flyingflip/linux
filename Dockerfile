@@ -10,14 +10,14 @@ ENV TERM=xterm
 
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/www/html/vendor/drush/drush:vendor/drush/drush:/var/www/html/drush/drush:/var/www/html/docroot/vendor/drush/drush
 
-# Update to NodeJS 16 and install nvm for supporting other versions.
+# Update to NodeJS 22 and install nvm for supporting other versions.
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install curl dirmngr apt-transport-https lsb-release ca-certificates sudo apt-utils wget gnupg && \
   mkdir -p /etc/apt/keyrings && \
   curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash && \
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && \
   export NVM_DIR="$HOME/.nvm" && \
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
@@ -33,8 +33,6 @@ RUN apt-get update && apt-get -y upgrade && DEBIAN_FRONTEND=noninteractive apt-g
   nodejs \
   ntp \
   redis-server \
-  sendmail \
-  software-properties-common \
   sudo \
   vim \
   wget \
@@ -45,7 +43,6 @@ RUN apt-get update && apt-get -y upgrade && DEBIAN_FRONTEND=noninteractive apt-g
   mariadb-client \
   postgresql-client \
   curl \
-  msmtp \
   net-tools \
   python3 \
   gettext \
@@ -54,7 +51,6 @@ RUN apt-get update && apt-get -y upgrade && DEBIAN_FRONTEND=noninteractive apt-g
   ghostscript \
   logrotate \
   cpanminus \
-  # webalizer \
   libgd-dev \
   libgd-perl \
   libclass-dbi-pg-perl \
@@ -69,10 +65,10 @@ RUN apt-get install -y \
   apache2-utils
 
 # Add ondrej/php PPA repository for PHP.
-RUN add-apt-repository ppa:ondrej/php \
-  && apt-get update -y \
-  && apt-get upgrade -y \
-  && apt-get install dialog
+RUN apt-get update && apt-get install -y gpg && echo -n 'deb http://ppa.launchpad.net/ondrej/php/ubuntu jammy main' > /etc/apt/sources.list.d/ondrej-ubuntu-php-jammy.list && \
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 14AA40EC0831756756D7F66C4F4EA0AAE5267A6C && \
+  apt-get update -y && \
+  apt-get upgrade -y
 
 RUN apt-get install -y \
   php7.4 \
@@ -335,12 +331,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
   --install-dir=/usr/local/bin \
   --filename=composer
 
-RUN composer \
-  --working-dir=/usr/local/src/ \
-  global \
-  require \
-  drush/drush:^8 && \
-  ln -s /usr/local/src/vendor/bin/drush /usr/bin/drush
+# RUN composer \
+#   --working-dir=/usr/local/src/ \
+#   global \
+#   require \
+#   drush/drush:^8 && \
+#   ln -s /usr/local/src/vendor/bin/drush /usr/bin/drush
 
 # Add our startup message on the container.
 ADD conf/startup.sh /root/.bashrc
@@ -375,7 +371,7 @@ RUN cpanm HTML::Template && \
   cpanm --force HDB && \
   cpanm --force DBD && \
   cpanm --force DBI && \
-  cpanm Net::HTTP && \
+  cpanm --force Net::HTTP && \
   cpanm URI && \
   cpanm JSON && \
   cpanm File::MimeInfo && \
@@ -391,8 +387,8 @@ RUN cpanm HTML::Template && \
   cpanm Email::SendGrid::V3
 
 # Our info for the info message!
-ENV VERSION=23.1
-ENV BUILD_DATE="March 1, 2024"
+ENV VERSION=23.2
+ENV BUILD_DATE="August 8, 2025"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
