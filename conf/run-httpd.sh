@@ -123,6 +123,11 @@ envsubst < /etc/php/8.4/cli/php.ini > /etc/php/8.4/cli/php2.ini
 mv -f /etc/php/8.4/apache2/php2.ini /etc/php/8.4/apache2/php.ini
 mv -f /etc/php/8.4/cli/php2.ini /etc/php/8.4/cli/php.ini
 
+envsubst < /etc/php/8.5/apache2/php.ini > /etc/php/8.5/apache2/php2.ini
+envsubst < /etc/php/8.5/cli/php.ini > /etc/php/8.5/cli/php2.ini
+mv -f /etc/php/8.5/apache2/php2.ini /etc/php/8.5/apache2/php.ini
+mv -f /etc/php/8.5/cli/php2.ini /etc/php/8.5/cli/php.ini
+
 if [[ -d "/sites-enabled" ]]; then
   cp -rf /sites-enabled/* /etc/apache2/sites-enabled/.
 fi
@@ -176,7 +181,7 @@ ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/0
 if [[ -n "${PHP_VERSION}" ]]; then
 
   shopt -s extglob
-  if [[ $PHP_VERSION == @(php7.4|php8.0|php8.1|php8.2|php8.3|php8.4) ]]; then
+  if [[ $PHP_VERSION == @(php7.4|php8.0|php8.1|php8.2|php8.3|php8.4|php8.5) ]]; then
     echo "PHP set to version $PHP_VERSION"
   else
     echo "PHP version $PHP_VERSION is not valid. Valid values: php7.4 to php8.4. Set to php8.4. by default"

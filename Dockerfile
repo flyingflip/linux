@@ -132,6 +132,34 @@ RUN apt-get install -y \
   libapache2-mod-php8.4
 
 RUN apt-get install -y \
+  php8.5 \
+  php8.5-bcmath \
+  php8.5-bz2 \
+  php8.5-cli \
+  php8.5-common \
+  php8.5-curl \
+  php8.5-dba \
+  php8.5-dev \
+  php8.5-gd \
+  php8.5-ldap \
+  php8.5-mbstring \
+  php8.5-mysql \
+  # php8.5-opcache \
+  # php8.5-apcu \
+  php8.5-readline \
+  php8.5-soap \
+  php8.5-zip \
+  php8.5-pgsql \
+  php8.5-dev \
+  php8.5-xml \
+  php8.5-intl \
+  # php8.5-redis \
+  # php8.5-memcached \
+  # php8.5-uuid \
+  # php8.5-uploadprogress \
+  libapache2-mod-php8.4
+
+RUN apt-get install -y \
   php8.3 \
   php8.3-bcmath \
   php8.3-bz2 \
@@ -286,6 +314,10 @@ COPY etc/php/8.4/apache2/php.ini /etc/php/8.4/apache2/php.ini
 COPY conf/mail.ini /etc/php/8.4/apache2/conf.d/mail.ini
 COPY conf/mail.ini /etc/php/8.4/cli/conf.d/mail.ini
 
+COPY etc/php/8.5/apache2/php.ini /etc/php/8.5/apache2/php.ini
+COPY conf/mail.ini /etc/php/8.5/apache2/conf.d/mail.ini
+COPY conf/mail.ini /etc/php/8.5/cli/conf.d/mail.ini
+
 # COPY conf/webalizer.conf /etc/webalizer/webalizer.conf
 COPY etc/logrotate /etc/cron.daily/logrotate
 COPY etc/apache2-logrotate /etc/logrotate.d/apache2
@@ -326,6 +358,7 @@ RUN update-alternatives --set php /usr/bin/php8.2 && \
   a2dismod php8.2 && \
   a2dismod php8.3 && \
   a2dismod php8.4 && \
+  a2dismod php8.5 && \
   service apache2 restart
 
 RUN apt-get install -y mlocate
@@ -336,13 +369,6 @@ RUN pecl channel-update pecl.php.net && \
 RUN curl -sS https://getcomposer.org/installer | php -- \
   --install-dir=/usr/local/bin \
   --filename=composer
-
-# RUN composer \
-#   --working-dir=/usr/local/src/ \
-#   global \
-#   require \
-#   drush/drush:^8 && \
-#   ln -s /usr/local/src/vendor/bin/drush /usr/bin/drush
 
 # Add our startup message on the container.
 ADD conf/startup.sh /root/.bashrc
@@ -393,8 +419,8 @@ RUN cpanm HTML::Template && \
   cpanm Email::SendGrid::V3
 
 # Our info for the info message!
-ENV VERSION=23.3
-ENV BUILD_DATE="September 9, 2025"
+ENV VERSION=24.0
+ENV BUILD_DATE="October 9, 2025"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
