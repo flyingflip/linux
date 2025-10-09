@@ -16,9 +16,13 @@ then
   make
   make install
   cd ../
-  echo "extension=leveldb.so" > /etc/php/8.2/apache2/conf.d/S20-leveldb.ini
   echo "extension=leveldb.so" > /etc/php/8.1/apache2/conf.d/S20-leveldb.ini
+  echo "extension=leveldb.so" > /etc/php/8.2/apache2/conf.d/S20-leveldb.ini
   echo "extension=leveldb.so" > /etc/php/8.3/apache2/conf.d/S20-leveldb.ini
+  echo "extension=leveldb.so" > /etc/php/8.4/apache2/conf.d/S20-leveldb.ini
+  echo "extension=leveldb.so" > /etc/php/8.5/apache2/conf.d/S20-leveldb.ini
+  echo "extension=leveldb.so" > /etc/php/8.5/cli/conf.d/S20-leveldb.ini
+  echo "extension=leveldb.so" > /etc/php/8.4/cli/conf.d/S20-leveldb.ini
   echo "extension=leveldb.so" > /etc/php/8.3/cli/conf.d/S20-leveldb.ini
   echo "extension=leveldb.so" > /etc/php/8.2/cli/conf.d/S20-leveldb.ini
   echo "extension=leveldb.so" > /etc/php/8.1/cli/conf.d/S20-leveldb.ini
