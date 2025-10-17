@@ -198,5 +198,7 @@ else
   cho "PHP set to version php8.4"
 fi
 
+redis-server &
+
 touch ~/placeholder.txt
 tail -f ~/placeholder.txt

@@ -419,8 +419,8 @@ RUN cpanm HTML::Template && \
   cpanm Email::SendGrid::V3
 
 # Our info for the info message!
-ENV VERSION=24.0
-ENV BUILD_DATE="October 9, 2025"
+ENV VERSION=24.0.1
+ENV BUILD_DATE="October 16, 2025"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
