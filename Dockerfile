@@ -131,7 +131,7 @@ RUN apt-get install -y \
   php8.4-uploadprogress \
   libapache2-mod-php8.4
 
-RUN apt-get install -y \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   php8.5 \
   php8.5-bcmath \
   php8.5-bz2 \
@@ -145,7 +145,7 @@ RUN apt-get install -y \
   php8.5-mbstring \
   php8.5-mysql \
   # php8.5-opcache \
-  # php8.5-apcu \
+  php8.5-apcu \
   php8.5-readline \
   php8.5-soap \
   php8.5-zip \
@@ -153,7 +153,7 @@ RUN apt-get install -y \
   php8.5-dev \
   php8.5-xml \
   php8.5-intl \
-  # php8.5-redis \
+  php8.5-redis \
   # php8.5-memcached \
   # php8.5-uuid \
   # php8.5-uploadprogress \
@@ -419,8 +419,8 @@ RUN cpanm HTML::Template && \
   cpanm Email::SendGrid::V3
 
 # Our info for the info message!
-ENV VERSION=24.0.1
-ENV BUILD_DATE="October 16, 2025"
+ENV VERSION=24.0.2
+ENV BUILD_DATE="November 21, 2025"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
