@@ -144,7 +144,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   php8.5-ldap \
   php8.5-mbstring \
   php8.5-mysql \
-  # php8.5-opcache \
   php8.5-apcu \
   php8.5-readline \
   php8.5-soap \
@@ -154,9 +153,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   php8.5-xml \
   php8.5-intl \
   php8.5-redis \
-  # php8.5-memcached \
-  # php8.5-uuid \
-  # php8.5-uploadprogress \
+  php8.5-memcached \
+  php8.5-uuid \
+  php8.5-uploadprogress \
   libapache2-mod-php8.4
 
 RUN apt-get install -y \
@@ -420,7 +419,7 @@ RUN cpanm HTML::Template && \
 
 # Our info for the info message!
 ENV VERSION=24.0.2
-ENV BUILD_DATE="November 21, 2025"
+ENV BUILD_DATE="February 14, 2026"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
