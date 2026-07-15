@@ -8,14 +8,14 @@ WORKDIR /root
 
 ENV TERM=xterm
 
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/www/html/vendor/drush/drush:vendor/drush/drush:/var/www/html/drush/drush:/var/www/html/docroot/vendor/drush/drush
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/www/html/vendor/drush/drush:vendor/drush/drush:/var/www/html/drush/drush:/var/www/html/docroot/vendor/drush/drush:/var/www/html/docroot/vendor/bin:vendor/bin:../vendor/bin
 
 # Update to NodeJS 22 and install nvm for supporting other versions.
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install curl dirmngr apt-transport-https lsb-release ca-certificates sudo apt-utils wget gnupg && \
   mkdir -p /etc/apt/keyrings && \
   curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_24.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && \
   export NVM_DIR="$HOME/.nvm" && \
@@ -407,7 +407,7 @@ RUN cpanm HTML::Template && \
   cpanm JSON && \
   cpanm File::MimeInfo && \
   cpanm HTTP::Request::AsCGI && \
-  cpanm LWP::Protocol::https && \
+  cpanm --force LWP::Protocol::https && \
   cpanm --force Module::Pluggable && \
   cpanm Email::Abstract && \
   cpanm Email::Sender && \
@@ -418,8 +418,8 @@ RUN cpanm HTML::Template && \
   cpanm Email::SendGrid::V3
 
 # Our info for the info message!
-ENV VERSION=25.0
-ENV BUILD_DATE="May 11, 2026"
+ENV VERSION=25.1
+ENV BUILD_DATE="July 15, 2026"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
