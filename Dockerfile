@@ -389,37 +389,37 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
   chmod +x wp-cli.phar && \
   mv wp-cli.phar /usr/local/bin/wp
 
-RUN cpanm HTML::Template && \
-  cpanm GD::Image && \
-  cpanm ExtUtils::PkgConfig && \
-  cpanm Crypt::Blowfish && \
-  cpanm HTTP::Request && \
-  cpanm --force Test::More && \
-  cpanm Image::Resize && \
-  cpanm CGI && \
-  cpanm CGI::Carp && \
-  cpanm --force Class::HPLOO && \
-  cpanm --force HDB && \
-  cpanm --force DBD && \
-  cpanm --force DBI && \
-  cpanm --force Net::HTTP && \
-  cpanm URI && \
-  cpanm JSON && \
-  cpanm File::MimeInfo && \
-  cpanm HTTP::Request::AsCGI && \
-  cpanm --force LWP::Protocol::https && \
-  cpanm --force Module::Pluggable && \
-  cpanm Email::Abstract && \
-  cpanm Email::Sender && \
-  cpanm Email::Simple && \
-  cpanm YAML::XS && \
-  cpanm Email::Sender::Transport::SMTPS && \
-  cpanm HTML::Template && \
-  cpanm Email::SendGrid::V3
+# RUN cpanm HTML::Template && \
+#   cpanm GD::Image && \
+#   cpanm ExtUtils::PkgConfig && \
+#   cpanm Crypt::Blowfish && \
+#   cpanm HTTP::Request && \
+#   cpanm --force Test::More && \
+#   cpanm Image::Resize && \
+#   cpanm CGI && \
+#   cpanm CGI::Carp && \
+#   cpanm --force Class::HPLOO && \
+#   cpanm --force HDB && \
+#   cpanm --force DBD && \
+#   cpanm --force DBI && \
+#   cpanm --force Net::HTTP && \
+#   cpanm URI && \
+#   cpanm JSON && \
+#   cpanm File::MimeInfo && \
+#   cpanm HTTP::Request::AsCGI && \
+#   cpanm --force LWP::Protocol::https && \
+#   cpanm --force Module::Pluggable && \
+#   cpanm Email::Abstract && \
+#   cpanm Email::Sender && \
+#   cpanm Email::Simple && \
+#   cpanm YAML::XS && \
+#   cpanm Email::Sender::Transport::SMTPS && \
+#   cpanm HTML::Template && \
+#   cpanm Email::SendGrid::V3
 
 # Our info for the info message!
-ENV VERSION=25.1
-ENV BUILD_DATE="July 15, 2026"
+ENV VERSION=25.2
+ENV BUILD_DATE="October 21, 2026"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \
