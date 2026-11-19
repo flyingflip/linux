@@ -65,6 +65,11 @@ chown apache2 /home/apache2/.msmtprc
 chmod 600 /home/apache2/.msmtprc
 
 # Set our PHP ini environment variable defauts.
+# Functions that can run commands in a shell are disabled for Apache by default.
+# This uses -v (not -n) so an explicitly empty value re-enables all of them.
+if [[ ! -v PHP_DISABLE_FUNCTIONS ]]; then
+  export PHP_DISABLE_FUNCTIONS=exec,passthru,shell_exec,system,proc_open,popen,pcntl_exec
+fi
 if [[ ! -n "${PHP_DISPLAY_ERRORS}" ]]; then
   export PHP_DISPLAY_ERRORS=Off
 fi

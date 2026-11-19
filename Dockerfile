@@ -418,8 +418,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 #   cpanm Email::SendGrid::V3
 
 # Our info for the info message!
-ENV VERSION=25.2
-ENV BUILD_DATE="October 21, 2026"
+ENV VERSION=26.0
+ENV BUILD_DATE="November 19, 2026"
 
 # Install the Backdrop CMS tool Bee
 RUN cd /root && \

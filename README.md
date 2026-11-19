@@ -1,5 +1,5 @@
 # FlyingFlip Studios, LLC. Platform Docker Container
-### Michael R. Bagnall: <mbagnall@flyingflip.com>
+### Michael R. Bagnall: <hello@flyingflip.com>
 
 This container is a standard Linux, Apache and PHP container designed to work with a separate database container for the purposes of running enterprise, production web sites or for developing web sites on your local computer. It is compiled to support Intel/AMD64 and Apple Silicon processors.
 
@@ -83,6 +83,10 @@ The password for the user configured in the htaccess dialog.
 **HTACCESS_USERNAME**  
 The username to be configured in the htaccess dialog.  
 
+**PHP_DISABLE_FUNCTIONS**  
+_Default Value: exec,passthru,shell_exec,system,proc_open,popen,pcntl_exec_  
+Comma-separated list of PHP functions to disable for code served through Apache. The default blocks every function that can run a shell command (the backtick operator is disabled along with `shell_exec`). Set to an empty string to disable nothing. Command-line PHP (drush, composer, wp-cli) is not affected.
+
 **PHP_DISPLAY_ERRORS**  
 _Default Value: Off_  
 This directive controls whether or not and where PHP will output errors, notices and warnings.
@@ -118,3 +122,24 @@ Maximum allowed size for uploaded files.
 **XDEBUG**  
 _Default Value: NULL_  
 This is a boolean. Set to 1 to enable xdebug for this container. Set to 0 or leave as default to disable. This has a performance cost so choose wisely.  
+
+## Building the Image
+
+The image is built for both `linux/amd64` and `linux/arm64`. A cross-platform build needs Docker Buildx with a builder that supports multiple platforms. Create one once with:
+
+```bash
+docker buildx create --name multiarch --use
+```
+
+Then build both architectures and push them to the registry under a single tag:
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 \
+    --tag flyingflip/linux:latest --push .
+```
+
+To build for just your own machine's architecture and load it into your local Docker instead:
+
+```bash
+docker build -t flyingflip/linux:dev .
+```
